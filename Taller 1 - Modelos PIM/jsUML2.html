@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <meta charset="utf-8">
+  <title>Diagramas a partir de texto</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+  <link type=‘text/css’ rel=‘stylesheet’ href=‘https://www.uco.es/~in1rosaj/tools/jsUML2/ejemplos/css/UDStyle.css’ media=‘screen’ />
+  
+  <script type="text/javascript" src="https://www.uco.es/~in1rosaj/tools/jsUML2/ejemplos/UDCore.js"></script>
+  <script type="text/javascript" src="https://www.uco.es/~in1rosaj/tools/jsUML2/ejemplos/UDModules.js"></script>
+
+  <script type="text/javascript">
+    window.onload = function () {
+
+      var classDiagram = new UMLClassDiagram(
+        { id: 'classDiagram', width: 800, height: 500 }
+      );
+      classDiagram.setName('Modelo PIM')
+
+      // CLASES
+      var restaurante = new UMLClass({ x: 100, y: 50 });
+      var menu = new UMLClass({ x: 120, y: 250 });
+      var producto = new UMLClass({ x: 400, y: 70 });
+
+      restaurante.setName("Restaurante");
+      restaurante.addAttribute('+nombres:String');
+      restaurante.addAttribute('+direccion:String');
+      restaurante.addAttribute('+telefono:String');
+      restaurante.addOperation('+getNombres():String');
+      restaurante.addOperation('+setNombres(nombres)');
+      
+      menu.setName("Menu");
+      menu.addAttribute('+nombre:String');
+      menu.addAttribute('+descripcion:String');
+      menu.addOperation('+getNombre():String');
+      menu.addOperation('+setNombre(nombre)');
+
+      producto.setName("Producto");
+      producto.addAttribute('+nombre:String');
+      producto.addAttribute('+descripcion:String');
+      producto.addAttribute('+precio:Double');
+      
+
+      classDiagram.addElement(restaurante);
+      classDiagram.addElement(menu);
+      classDiagram.addElement(producto);
+
+      // RELACIONES
+      var composicion = new UMLComposition({ a: restaurante, b: menu });
+      composicion.setValue( 'name', 'tiene');
+      classDiagram.addElement(composicion);
+
+      var composicion = new UMLComposition({ a: menu, b: producto });
+      composicion.setValue( 'name', 'tiene');
+      classDiagram.addElement(composicion);
+     
+
+      classDiagram.draw();
+      classDiagram.interaction(true);
+    }
+  </script>
+</head>
+
+<body>
+
+  <div class="row">
+    <div class="col-md-10 m-auto my-5">
+      <div class="card">
+        <div class="card-header">
+          <strong>Diagrama de clases con jsUML2 (PIM)</strong>
+        </div>
+        <div class="card-body">
+          <p>
+            Ejemplo librería <a target="_blank"
+              href="https://www.uco.es/users/in1rosaj//tools/jsUML2/doc/TheProgrammersGuide_003.htm">jsUML2</a>
+            para crear diagramas a partir de texto y su
+            <a target="_blank" href="https://www.uco.es/~in1rosaj/tools/jsUML2/editor/index.html">Live editor</a>
+          </p>
+          <div id="classDiagram"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+
+</html>

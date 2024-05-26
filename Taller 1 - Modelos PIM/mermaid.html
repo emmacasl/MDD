@@ -1,0 +1,97 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Diagramas a partir de texto</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" 
+    integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <script>
+        mermaid.initialize({ 
+            startOnLoad: true 
+        });
+    </script>
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-10 m-auto my-5">
+            <div class="card">
+                <div class="card-header">
+                    <strong>Diagrama de clases con Mermaid (PIM)</strong> <br>
+                    <strong>Edgar Manuel Macas Loja</strong>
+                </div>
+                <div class="card-body">
+                    <b>
+                        Sistema de Delivery
+                    </b>
+                    <br>
+                    <br>
+                
+                    <div class="mermaid">
+                        classDiagram
+
+                            direction LR
+
+                            class TipoRestaurante{
+                                &lt;&lt;enumeration&gt;&gt;
+                                COMIDA_RAPIDA
+                                VIP
+                                GOURMET
+                            }
+
+                            class Restaurante {
+                                +nombre: String
+                                +direccion: String
+                                +telefono: String
+                                +tipo: TipoRestaurante
+                                +getNombre() String
+                                +setNombre(nombre)
+                            }
+
+                            class Menu {
+                                +nombre: String
+                                +descripcion: String
+                                +getNombre() String
+                                +setNombre(nombre)
+                            }
+
+                            class Producto {
+                                +nombre: String
+                                +descripcion: String
+                                +precio: Double
+                                +getNombre() String
+                                +setNombre(nombre)
+                            }
+
+                            class Pedido {
+                                +fecha: String
+                                +hora: String
+                                +cliente: Double
+                                +telefono:String
+                                +getfecha() String
+                                +setFecha(fecha)
+                            }
+
+                            class Usuario {
+                                +nombre: String
+                                +apellido: String
+                                +identificacion: String
+                                +direccion: String
+                                +telefono:String
+                                +getnombre() String
+                                +setNombre(fecha)
+                            }
+
+                            TipoRestaurante .. Restaurante
+                            Restaurante "1" *-- "1..*" Menu: tiene
+                            Menu "1" *-- "1..*" Producto: tiene
+                            Restaurante "1" *-- "1..*" Pedido: tiene
+                            Pedido "1" o-- "1..*" Producto: contiene
+                            Usuario "1" *-- "1..*" Pedido: realiza
+
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>   
+</body>
+</html>
